@@ -121,31 +121,54 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     const modal = document.querySelector('.modal'),
-          whiteBtn = document.querySelector('.btn_white'),
-          blackBtn = document.querySelector('.btn_dark'),
-          closeBtn = document.querySelector('.modal__close');
+          // whiteBtn = document.querySelector('.btn_white'),
+          // blackBtn = document.querySelector('.btn_dark'),
+          modalTrigger = document.querySelectorAll('[data-modal]'),
+          call = document.querySelector('[data-call]'),
+          closeBtn = document.querySelector('[data-close]');
 
 
 
-
-
-    whiteBtn.addEventListener('click', (event) => {
-        modal.classList.add('show', 'fade');
+    modalTrigger.forEach(item =>  {
+        item.addEventListener('click', (event) => {
+            modal.classList.add('show', 'fade');
+            document.body.style.overflow = 'hidden';
+        });
     });
 
-    blackBtn.addEventListener('click', (event) => {
-        modal.classList.add('show', 'fade');
-    });
+    // whiteBtn.addEventListener('click', (event) => {
+    //     modal.classList.add('show', 'fade');
+    // });
+    //
+    // blackBtn.addEventListener('click', (event) => {
+    //     modal.classList.add('show', 'fade');
+    // });
+
+    function closeModal () {
+        modal.classList.remove('show', 'fade');
+        document.body.style.overflow = '';
+    }
 
     closeBtn.addEventListener('click', (event) => {
-        modal.classList.remove('show', 'fade');
+        closeModal ();
     });
 
+    modal.addEventListener('click', (e) =>{
+        if (e.target === modal) {
+            closeModal ();
+        }
 
+    });
 
+    call.addEventListener('click', (event) => {
+        alert('haha nope');
+    });
 
-
-
+    document.addEventListener('keydown', (e) => {
+        if (e.code === "Escape" && modal.classList.contains('show')) {
+            closeModal ();
+        }
+    });
 
 
 
